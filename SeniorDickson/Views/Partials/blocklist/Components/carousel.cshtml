@@ -1,0 +1,15 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@{
+    var content = (Carousel)Model.Content;
+    var settings = (Carousel)Model.Settings;
+}
+
+
+<div class="Carousel">
+    @foreach(var image in content.Images)
+    {
+        <img src="@image.Url()?format=webp" alt="@image.GetProperty("altTag")" >
+    }
+</div>

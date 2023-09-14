@@ -1,0 +1,67 @@
+﻿@using Moirae.Controllers
+@model Moirae.ViewModels.ContactFormViewModel;
+
+@{
+    string placeholder = "Start Typing";
+    var acceptedFileTypes = ".pdf, .zip, .igs, .iges, .dxf, .prt, .mcx, .mcx5, .mcx6, .mcx7, .CATPart, .step, .stp, .stl";
+}
+
+@using (Html.BeginUmbracoForm<ContactFormController>(nameof(ContactFormController.Submit), FormMethod.Post, new { @id = "Contact-Form" }))
+{
+    <div class="form-group">
+        @Html.LabelFor(n => n.Name, "Name*")
+        @Html.ValidationMessageFor(n => n.Name)
+        @Html.TextBoxFor(n => n.Name, new {@class="form-control form-input", placeholder=placeholder})
+        
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(n => n.Email, "Email*")
+        @Html.ValidationMessageFor(n => n.Email)
+        @Html.TextBoxFor(n => n.Email, new {@class="form-control form-input", placeholder=placeholder})
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(n => n.Phone, "Phone*")
+        @Html.ValidationMessageFor(n => n.Phone)
+        @Html.TextBoxFor(n => n.Phone, new {@class="form-control form-input", placeholder=placeholder})
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(n=> n.Company)
+        @Html.ValidationMessageFor(n => n.Company)
+        @Html.TextBoxFor(n => n.Company, new {@class="form-control form-input", placeholder=placeholder})
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(n => n.Message, "Message*")
+        @Html.ValidationMessageFor(n => n.Message)
+        @Html.TextAreaFor(n => n.Message, new {@class="form-control form-input", placeholder=placeholder})
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(n => n.File)
+        @Html.ValidationMessageFor(n => n.File)
+        @Html.TextBoxFor(n => n.File, new { @type = "file", accept = acceptedFileTypes})
+        <div id="AcceptedTypes">
+        <p>Accepted File Types:</p>
+        <p>@acceptedFileTypes</p>
+        </div>
+    </div>
+    <button type="submit" name="Submit" value="Send Enquiry" class="CTA">Send Enquiry</button>
+}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const inputs = document.querySelectorAll(".form-input");
+        console.log(inputs);
+        inputs.forEach(x => x.addEventListener("input", Check));
+        console.log(inputs);
+
+        function Check() {
+            console.log("checking");
+            if (this.checkValidity()) {
+                console.log("passed check");
+                this.classList.remove("input-validation-error");
+            } else {
+                console.log("failed check");
+            }
+        }
+    });
+    
+</script>

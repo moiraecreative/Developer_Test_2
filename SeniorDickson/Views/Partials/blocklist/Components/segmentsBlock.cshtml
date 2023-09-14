@@ -1,0 +1,22 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Moirae.Utility;
+@{
+    var content = (SegmentsBlock)Model.Content;
+    var settings = (SegmentsBlock)Model.Settings;
+}
+
+<div class="Block SegmentBlock">
+    @foreach(var segment in content.Segments)
+    {
+        var c = (Segment)segment.Content;
+        var s = (Segment)segment.Settings;
+
+        <div class="Segment">
+            @if(!String.IsNullOrEmpty(c.Header)) {
+                <h2>@c.Header</h2>
+            }
+            @c.Text
+        </div>
+    }
+</div>

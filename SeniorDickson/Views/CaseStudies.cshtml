@@ -1,0 +1,73 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.CaseStudies>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+
+    Layout = "Master.cshtml";
+
+    var articlePageSize = 12;
+
+    var articles = Model.Children().OrderByDescending(x => x.Value<DateTime>("publishDate"));
+    string articlesPage = HttpContextAccessor.HttpContext.Request.Query["ArticlePage"];
+    int totalArticlePage = (int)Math.Ceiling((double)articles.Count() / articlePageSize);
+    var currentArticlePage = (String.IsNullOrEmpty(articlesPage)) ? 0 : (Int32.Parse(articlesPage) - 1);
+
+    var pagedArticles = articles.Skip((currentArticlePage) * articlePageSize).Take(articlePageSize);
+}
+
+@await Html.PartialAsync("Hero")
+
+<div class="Block CaseStudiesBlock Page">
+    <div class="Breakpoint-Wrap">
+        <div class="CaseStudiesContainer">
+            @foreach (CaseStudy cs in pagedArticles)
+            {
+                @await Html.PartialAsync("Case Study Card", (IPublishedContent)cs)
+            }
+        </div>
+        @if (Convert.ToInt32(totalArticlePage) > 1)
+        {
+            <form>
+                <div class="Article-Page-Selector">
+                    @if (currentArticlePage != 0)
+                    {
+                        <input type="radio" id="Articlepage_back" value="@currentArticlePage" onchange="this.form.submit()" name="ArticlePage">
+                        <label for="Articlepage_back">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+                            </svg>
+                        </label>
+                    }
+
+                    @for (int i = 0; i < Convert.ToInt32(totalArticlePage); i++)
+                    {
+                        @if (currentArticlePage == i)
+                        {
+                            <input type="radio" id="Articlepage_@(i+1)" value="@(i+1)" onchange="this.form.submit()" name="ArticlePage" checked="true">
+                            <label for="Articlepage_@(i+1)">@(i + 1)</label>
+                        }
+                        else
+                        {
+                            <input type="radio" id="Articlepage_@(i+1)" value="@(i+1)" onchange="this.form.submit()" name="ArticlePage">
+                            <label for="Articlepage_@(i+1)">@(i + 1)</label>
+                        }
+
+                    }
+                    @if (currentArticlePage < (totalArticlePage - 1))
+                    {
+                        <input type="radio" id="Articlepage_next" value="@(currentArticlePage+2)" onchange="this.form.submit()" name="ArticlePage">
+                        <label for="Articlepage_next">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                            </svg>
+                        </label>
+                    }
+
+                </div>
+            </form>
+        }
+    </div>
+</div>
+@await Html.PartialAsync("Dark Form")

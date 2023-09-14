@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Senior Dickson Back Office Tour",
+    "alias": "sDBackofficeTour",
+    "group": "Senior Dickson Bespoke Tours",
+    "groupOrder": 1,
+    "allowDisable": true,
+    "culture" : "",
+    "content-type" :  "",
+    "requiredSections": [ "content", "media" ],
+    "steps": [
+      {
+        "title": "Senior Dickson Back Office Tour",
+        "content": "<p>Welcome to the <strong> Senior Dickson</strong> Umbraco site.</p><p></p><p>In this tour, we will visit some of the more common places you will look at in your umbraco site.</p>",
+        "type": null,
+        "element": "",
+        "elementPreventClick": "false",
+        "backdropOpacity": 0.6,
+        "view": null,
+        "customProperties": null
+      },
+      {
+
+      }
+    ]
+  }
+]

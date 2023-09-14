@@ -1,0 +1,27 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.CaseStudy>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Moirae.Utility;
+
+@{
+    var title = Model.Title ?? Model.Name;
+}
+<a href="@Model.Url()" class="NoLinkStyles">
+    <div class="CaseStudyCard">
+        <div class="Image">
+            @if (Model.HeroImage != null)
+            {
+                <img src="@Model.HeroImage.Url()" alt="@(Model.HeroImage.Value<string>("altTag"))" />
+            }
+            else
+            {
+                DefaultImageMaker.BuildDefaultImage();
+            }
+        </div>
+        <div class="Text">
+            <div class="Sector"><p>@Model.RelatedSector?.Name</p></div>
+            <div class="Title MatchHeight"><h3>@Model.Title</h3></div>
+            <div class="CTA">Find Out More</div>
+        </div>
+    </div>
+</a>

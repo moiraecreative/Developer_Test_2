@@ -1,0 +1,63 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+    Master root = Umbraco.ContentAtRoot().FirstOrDefault() as Master;
+    var pages = root.Children().Where(x => x.Value<bool>("footerVisibility"));
+}
+
+
+<footer>
+    <div class="Block Footer">
+        <div class="Breakpoint-Wrap">
+            <a href="/" class="Home">
+                <img src="@root.FooterLogo.Url()" alt="@root.FooterLogo.GetProperty("altTag")" />
+            </a>
+            <div class="Footer-Nav">
+                <h3>Links</h3>
+                @foreach(Webpages navPage in pages)
+                {
+                    <a href="@navPage.Url()" class="NoLinkStyles">
+                        <p>@(String.IsNullOrEmpty(navPage.NavTitle)? navPage.Name : navPage.NavTitle)</p>
+                    </a>
+                }
+            </div>
+            <div class="Contact-Nav">
+                <h3>Contact Us</h3>
+                <a href="tel:@root.PhoneNumber" class="NoLinkStyles"><p>@root.PhoneNumber</p></a>
+                <a href="mailto:@root.Email" class="NoLinkStyles"><p>@root.Email</p></a>
+                <a href="https://goo.gl/maps/YmcpbMHXRXjhpAZN8" class="NoLinkStyles">
+                    <p>@root.Line1</p>
+                    <p>@root.Line2</p>
+                    <p>@root.TownCity</p>
+                    <p>@root.County @root.Postcode</p>
+                </a>
+            </div>
+            <div class="Socials-Nav">
+                <h3>Follow Us</h3>
+                @foreach(Social social in root.Socials.Children())
+                {
+                    <a href="@social.Link" class="NoLinkStyles">
+                        <p>
+                        <img src="@social.Icon.Url()" alt="@social.Name" />
+                        <span>@(String.IsNullOrEmpty(social.LinkText)? social.Name : social.LinkText)</span>
+                        </p>
+                    </a>
+                }
+            </div>
+            <div class="Accreditations-Nav">
+                <h3>Accreditations</h3>
+                <div class="AccredContainer">
+                    @foreach(Accreditation acc in root.Accreditations.Children())
+                    {
+                        <img src="@acc.Image.Url()" alt="@acc.Name"/>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="Moirae-Footer">
+        <p>
+            &copy; @DateTime.Now.Year @root.CopyrightOwner
+        </p>
+        <p>Website Designed by <a href="https://www.moirae.co.uk/" class="NoLinkStyles"><strong>Moirae Creative Agency</strong></a><img src="https://www.moirae.co.uk/favicon.png"</p>
+    </div>
+</footer>

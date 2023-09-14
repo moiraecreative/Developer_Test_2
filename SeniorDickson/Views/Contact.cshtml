@@ -1,0 +1,38 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Contact>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    Layout = "Master.cshtml";
+    Master root = Umbraco.ContentAtRoot().FirstOrDefault() as Master;
+}
+
+@await Html.PartialAsync("Hero")
+<div class="Block ContactDetails">
+    <div class="Breakpoint-Wrap">
+        <h2>Contact Details</h2>
+        <div class="Details">
+            <a href="tel:@root.PhoneNumber" class="NoLinkStyles"><p>@root.PhoneNumber</p></a>
+            <a href="mailto:@root.Email" class="NoLinkStyles"><p>@root.Email</p></a>
+            <a href="https://goo.gl/maps/YmcpbMHXRXjhpAZN8" class="NoLinkStyles">
+                <p>@root.Line1</p>
+                <p>@root.Line2</p>
+                <p>@root.TownCity</p>
+                <p>@root.County @root.Postcode</p>
+            </a>
+        </div>
+        <div class="Socials">
+            <h2>Follow Us</h2>
+            @foreach (Social social in root.Socials.Children())
+            {
+                <a href="@social.Link" class="NoLinkStyles">
+                    <p>
+                        <img src="@social.Icon.Url()" alt="@social.Name" />
+                        <span>@(String.IsNullOrEmpty(social.LinkText) ? social.Name : social.LinkText)</span>
+                    </p>
+                </a>
+            }
+        </div>
+    </div>
+</div>
+@await Html.PartialAsync("Light Form")
+@await Html.GetBlockListHtmlAsync(Model.Blocks)

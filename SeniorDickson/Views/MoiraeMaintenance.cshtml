@@ -1,0 +1,40 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.MoiraeMaintenance>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    Layout = null;
+    Master root = Umbraco.ContentAtRoot().FirstOrDefault() as Master;
+}
+
+<!doctype html>
+<html>
+<head>
+	@await Html.PartialAsync("Header Config")
+	<meta-fields></meta-fields>
+	<render-script position="HeadBottom"></render-script>
+</head>
+<body>
+	<render-script position="BodyTop"></render-script>
+    <div class="Block Maintenance Hero">
+        <div class="Background" aria-hidden="true">
+            <img src="/BackOfficeImages/machine.jpeg" alt="@(Model.HeroImage.Value<string>("altTag"))" />
+            <div class="Gradient"></div>
+        </div>
+        <div class="Breakpoint-Wrap" style="margin-left: auto; margin-right: auto;">
+            <h1>Down For Maintenance</h1>
+            <div class="Text">
+                <p>We're down for maintenance. Come back later or visit one of our socials below.</p>
+            </div>
+            <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem;">
+                @foreach(Social social in root.Socials.Children())
+                {
+                    <a href="@social.Link" class="NoLinkStyles">
+                        <img src="@social.Icon.Url()" alt="@social.Name" style="filter:grayscale(1) brightness(100000);width: 3rem; aspect-ratio: 1/1;" />
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+	<render-script position="BodyBottom"></render-script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+@{
+    string favUrl = Umbraco.ContentAtRoot().FirstOrDefault().Value<IPublishedContent>("favicon").Url();
+    string whiteFavUrl = Umbraco.ContentAtRoot().FirstOrDefault().Value<IPublishedContent>("whiteOutFavicon").Url();
+}
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+@*<link rel="icon" href=@favUrl type="image/x-image"/>*@
+<link rel="icon" href="@favUrl" type="image/x-image" media="(prefers-color-scheme: light)" />
+<link rel="icon" href=@whiteFavUrl type="image/x-image" media="(prefers-color-scheme: dark)" />
+
+<script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="~/css/Styles.css" />
+<link rel="stylesheet" href="~/css/Navbar.css" />

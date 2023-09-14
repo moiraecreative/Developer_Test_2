@@ -1,0 +1,22 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@{
+    var content = (CaseStudiesBlock)Model.Content;
+    var settings = (CaseStudiesBlock)Model.Settings;
+    Master root = Umbraco.ContentAtRoot().FirstOrDefault() as Master;
+    var studies = root.CaseStudies.Children().OrderByDescending(x => x.Value<DateTime>("publishDate")).Take(3);
+}
+
+
+<div class="Block CaseStudiesBlock">
+    <div class="Breakpoint-Wrap">
+        <h2>@(String.IsNullOrEmpty(content.Header) ? content.ContentType.Alias : content.Header)</h2>
+        <div class="CaseStudiesContainer">
+            @foreach(var caseStudy in studies)
+            {
+                @await Html.PartialAsync("Case Study Card", (IPublishedContent)caseStudy); 
+            }
+        </div>
+    </div>
+</div>

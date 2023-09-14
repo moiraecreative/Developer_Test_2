@@ -1,0 +1,45 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Service>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    Layout = "Master.cshtml";
+    Master root = Umbraco.ContentAtRoot().FirstOrDefault() as Master;
+    List<IPublishedContent> relCaseStudies = new List<IPublishedContent>();
+    var currentPageId = Model.Id;
+    relCaseStudies = root.CaseStudies.Children()
+        .Where(cs => cs.Value<IEnumerable<IPublishedContent>>("relatedService")
+        ?.Contains(Model) == true)
+        .OrderByDescending(cs => cs.Value<DateTime>("publishDate"))
+        .Take(3)
+        .ToList();
+}
+
+<div class="Block Hero Service">
+    <div class="Background" aria-hidden="true">
+        <img src="@Model.HeroImage.Url()" alt="@(Model.HeroImage.Value<string>("altTag"))" />
+        <div class="Gradient"></div>
+    </div>
+    <div class="Breakpoint-Wrap">
+        @await Html.PartialAsync("Breadcrumb")
+        <h1>@(String.IsNullOrEmpty(Model.Title) ? Model.Name : Model.Title)</h1>
+        <img src="@Model.HeroImage.Url()" alt="@Model.HeroImage.GetProperty("altTag")" />
+    </div>
+</div>
+<div class="SideNavContainer">
+    <div class="Breakpoint-Wrap">
+        @await Html.GetBlockListHtmlAsync(Model.Blocks)
+        @await Html.PartialAsync("SidebarNav")
+    </div>
+</div>
+<div class="Block CaseStudiesBlock">
+    <div class="Breakpoint-Wrap">
+        <h2>Relevant Case Studies</h2>
+        <div class="CaseStudiesContainer">
+        @foreach (CaseStudy cs in relCaseStudies)
+        {
+            @await Html.PartialAsync("Case Study Card",(IPublishedContent)cs)
+        }
+        </div>
+    </div>
+</div>
+@await Html.PartialAsync("Dark Form")

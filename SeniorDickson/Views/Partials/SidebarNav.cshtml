@@ -1,0 +1,19 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Webpages>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    var parent = Model.Parent as Webpages;
+}
+<div class="SidebarNav"> 
+    <h2>@(String.IsNullOrEmpty(parent.NavTitle)? parent.Name : parent.NavTitle)</h2>
+    <ul>
+    @foreach(Webpages c in parent.Children())
+    {
+        <li class="@(c.IsAncestorOrSelf(Model)? "current" : null)">
+            <a href="@c.Url()" class="NoLinkStyles">
+                @(String.IsNullOrEmpty(c.NavTitle)? c.Name : c.NavTitle)
+            </a>
+            </li>
+    }
+    </ul>
+</div>

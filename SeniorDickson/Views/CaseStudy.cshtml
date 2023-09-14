@@ -1,0 +1,60 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.CaseStudy>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    Layout = "Master.cshtml";
+    List<IPublishedContent> relCS = new List<IPublishedContent>();
+    try
+    {
+        relCS = Model.Parent.Children().Where(x => x != Model).Take(3).ToList();
+    } catch (Exception ex)
+    {
+        Console.Error.WriteLine("Failed to attach Relevant Case Studies: " + ex.Message);
+    }
+}
+
+<div class="Block Hero CaseStudy">
+    <div class="Background" aria-hidden="true">
+        <img src="@Model.HeroImage.Url()" alt="@(Model.HeroImage.Value<string>("altTag"))" />
+        <div class="Gradient"></div>
+    </div>
+    <div class="Breakpoint-Wrap">
+        @await Html.PartialAsync("Breadcrumb")
+        <h1>@(String.IsNullOrEmpty(Model.Title) ? Model.Name : Model.Title)</h1>
+    </div>
+</div>
+@await Html.GetBlockListHtmlAsync(Model.Blocks)
+@if (relCS.Count > 0)
+{
+    <div class="Block CaseStudiesBlock">
+        <div class="Breakpoint-Wrap">
+            <h2>Other Case Studies</h2>
+            <div class="CaseStudiesContainer">
+                @foreach (CaseStudy cs in relCS)
+                {
+                    @await Html.PartialAsync("Case Study Card", (IPublishedContent)cs)
+                }
+            </div>
+        </div>
+    </div>
+}
+@await Html.PartialAsync("Dark Form")
+
+
+
+
+@section scripts {
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.Carousel').slick({
+                infinite: true
+            });
+        });
+    </script>
+}
+
+@section HeaderScripts {
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+}

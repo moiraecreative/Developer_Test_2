@@ -1,0 +1,25 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@{
+    var content = (SectorsBlock)Model.Content;
+    var settings = (SectorsBlock)Model.Settings;
+    Master root = Umbraco.ContentAtRoot().FirstOrDefault() as Master;
+}
+
+<div class="Block SectorsBlock">
+    <div class="Breakpoint-Wrap">
+        <h2>@(String.IsNullOrEmpty(content.Header)? content.ContentType.Alias : content.Header)</h2>
+        <div class="SectorContainer">
+            @foreach(var sector in root.Sectors.Children().Take(3))
+            {
+                @await Html.PartialAsync("Sector Card", (IPublishedContent)sector)
+            }
+        </div>
+        <a href="@root.Sectors.Url()" class="NoLinkStyles">
+            <div class="CTA">
+                + Show More
+            </div>
+        </a>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Moirae.Utility;
+@{
+    var content = (Blocks)Model.Content;
+    var settings = (Blocks)Model.Settings;
+}
+
+<div class="Block RTBlock">
+    <div class="Breakpoint-Wrap">
+        @if (!String.IsNullOrEmpty(content.Header))
+        {
+            <h2>@content.Header</h2>
+        }
+        @content.Text
+    </div>
+</div>

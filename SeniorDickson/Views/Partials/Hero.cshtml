@@ -1,0 +1,16 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Webpages>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+<div class="Block Hero">
+    <div class="Background" aria-hidden="true">
+        <img src="@Model.HeroImage.Url()" alt="@(Model.HeroImage.Value<string>("altTag"))" />
+        <div class="Gradient"></div>
+    </div>
+    <div class="Breakpoint-Wrap">
+        <h1>@Model.Title</h1>
+        <div class="Text">
+            @Model.HeroText
+        </div>
+    </div>
+</div>

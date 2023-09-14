@@ -1,0 +1,22 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Sectors>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    Layout = "Master.cshtml";
+    var sectors = Model.Children();
+}
+
+@Html.Partial("Hero")
+
+<div class="Block SectorsBlock Page">
+    <div class="Breakpoint-Wrap">
+        <div class="SectorContainer">
+            @foreach (var sector in sectors)
+            {
+                @await Html.PartialAsync("Sector Card", (IPublishedContent)sector)
+            }
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("Dark Form")

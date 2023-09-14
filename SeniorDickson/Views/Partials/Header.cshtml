@@ -1,0 +1,124 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+@{
+    var root = Umbraco.ContentAtRoot().FirstOrDefault() as Master;
+    var logo = root.CompanyLogo;
+    var children = root.Children().Where(x => x.Value
+            <bool>
+                 ("visibility") == true);
+}
+
+<header>
+    <a href="/" class="Logo">
+        <img src="@logo.Url()" alt="@root.Name" />
+    </a>
+    <div class="Tablet-Only">
+        <a href="@root.ContactForm.Url()">
+            <div class="CTA">
+                Contact Us
+            </div>
+        </a>
+    </div>
+    <input type="checkbox" class="toggle" id="nav-toggle" onclick="changeNavColour()" />
+    <label for="nav-toggle" id="nav-toggle-label">
+        @for (int i = 0; i < 3; i++)
+        {
+            <div class="bar"></div>
+        }
+    </label>
+
+    <nav id="nav">
+        <ul>
+            @foreach (Webpages child in children)
+            {
+                <li class="@(child.IsAncestorOrSelf(Model)? "current" : null)">
+                    <div class="dropper" target="@child.Id">
+                        <a href="@child.Url()">@(String.IsNullOrEmpty(child.NavTitle) ? child.Name : child.NavTitle)</a>
+                        @if (child.Children().Where(x => x.Value<bool>("visibility")).Count() > 0)
+                        {
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                            </svg>
+                        }
+                    </div>
+                    @if (child.Children().Where(x => x.Value<bool>("visibility")).Count() > 0)
+                    {
+                        <div class="dropdown" id="@child.Id">
+                            <div class="Desktop">
+                                <div class="Breakpoint-Wrap">
+                                    @{
+                                        switch (child.DropdownStyle)
+                                        {
+                                            case "Side-By-Side":
+                                                <div class="Text">
+                                                    <h2>@(String.IsNullOrEmpty(child.NavTitle) ? child.Name : child.NavTitle)</h2>
+                                                    <p>@child.NavText</p>
+                                                    <a href="@child.Url()">
+                                                        <div class="CTA">
+                                                            Find Out More
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                                <div class="ServiceContainer">
+                                                    @foreach (Webpages gc in child.Children().Where(x => x.Value<bool>("visibility")))
+                                                    {
+                                                        @Html.Partial("Service Card", (IPublishedContent)gc)
+                                                    }
+                                                </div>
+                                                break;
+
+                                            case "Icons":
+                                                <div class="HeadingContainer">
+                                                    <h2>@(String.IsNullOrEmpty(child.NavTitle) ? child.Name : child.NavTitle)</h2>
+                                                    <a href="@child.Url()">See All @child.Name</a>
+                                                </div>
+                                                <div class="SectorContainer">
+                                                    @foreach (Webpages gc in child.Children().Where(x => x.Value<bool>("visibility")))
+                                                    {
+                                                        @Html.Partial("Sector Card", (IPublishedContent)gc)
+                                                    }
+                                                </div>
+                                                break;
+
+                                            default:
+                                                if (child.DropdownStyle == "Default" || child.DropdownStyle == null)
+                                                {
+                                                    <ul>
+                                                        @foreach (Webpages gc in child.Children().Where(x => x.Value<bool>("visibility")))
+                                                        {
+                                                            <li>
+                                                                <a href="@gc.Url()">@(String.IsNullOrEmpty(gc.NavTitle) ? gc.Name : gc.NavTitle)</a>
+                                                            </li>
+                                                        }
+                                                    </ul>
+                                                }
+                                                break;
+
+
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <div class="Mobile">
+                                @foreach (Webpages gc in child.Children())
+                                {
+                                    <a href="@gc.Url()">@(String.IsNullOrEmpty(gc.NavTitle) ? gc.Name : gc.NavTitle)</a>
+                                }
+                            </div>
+                        </div>
+                    }
+                </li>
+
+            }
+            <li class="@(root.ContactForm.IsAncestorOrSelf(Model)? "current" : null) Contact">
+                <div class="dropper">
+                    <a href="@root.ContactForm.Url()" class="NoLinkStyles">
+                        <div class="CTA">
+                            Contact Us
+                        </div>
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>

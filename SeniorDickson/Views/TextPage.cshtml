@@ -1,0 +1,14 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.TextPage>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "Master.cshtml";
+}
+
+@await Html.PartialAsync("Hero");
+
+<div class="RTBlock">
+	<div class="Breakpoint-Wrap">
+		@Model.Text
+	</div>
+</div>
