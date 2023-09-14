@@ -1,0 +1,80 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Moirae.Utility;
+@{
+    var content = (TeamBlock)Model.Content;
+    var settings = (TeamBlock)Model.Settings;
+}
+
+
+<div class="Block TeamBlock">
+    <div class="Breakpoint-Wrap">
+        <h2>@content.Header</h2>
+        <div class="Rich-Text">
+            @content.Text
+        </div>
+        <div class="show-more CTA">+ Show More</div>
+        <div class="TeamContainer">
+            @foreach(var member in content.TeamMembers)
+            {
+                var c = (TeamMember)member.Content;
+                var s = (TeamMember)member.Settings;
+
+                <div class="Team-Card">
+                    <div class="Image">
+                        @if(c.Image != null)
+                        {
+                            <img src="@c.Image.Url()?format=webp" alt="@c.Image.GetProperty("altTag")" />
+                        } else
+                        {
+                            @await DefaultImageMaker.BuildDefaultPerson()
+                        }
+                    </div>
+                    <div class="Text">
+                        <h3>@c.MemberName</h3>
+                        <p>@c.Description</p>
+                    </div>
+                </div>
+            }
+        </div>
+        
+    </div>
+</div>
+
+<script>
+    window.addEventListener('DOMContentLoaded', function () {
+        var showMoreButton = document.querySelector('.show-more');
+        var teamCards = document.querySelectorAll('.TeamContainer .Team-Card:nth-child(n+5)');
+
+        showMoreButton.addEventListener('click', function () {
+            this.classList.toggle('is-expanded');
+            var isExpanded = this.classList.contains('is-expanded');
+
+            if(isExpanded) {
+                this.innerText = "- Show Less";
+            } else {
+                this.innerText = "+ Show More";
+            }
+            teamCards.forEach(function (card) {
+                card.classList.add('transitioning'); /* Add a class to indicate transitioning */
+                if (isExpanded) {
+                    card.style.maxHeight = card.scrollHeight + 'px';
+                } else {
+                    card.style.maxHeight = '0';
+                }
+            });
+
+            setTimeout(function () {
+                teamCards.forEach(function (card) {
+                    card.classList.remove('transitioning'); /* Remove the transitioning class after the transition */
+                });
+            }, 400);
+        });
+    });
+</script>
+
+
+
+
+
+

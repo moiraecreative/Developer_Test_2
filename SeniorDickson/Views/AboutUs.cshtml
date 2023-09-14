@@ -1,0 +1,12 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.AboutUs>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "Master.cshtml";
+}
+
+@await Html.PartialAsync("Hero")
+
+@await Html.GetBlockListHtmlAsync(Model.Blocks)
+
+@await Html.PartialAsync("Dark Form")

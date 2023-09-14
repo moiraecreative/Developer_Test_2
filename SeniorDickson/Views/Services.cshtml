@@ -1,0 +1,19 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Services>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "Master.cshtml";
+}
+
+@await Html.PartialAsync("Hero")
+
+<div class="Block CardHolder">
+	<div class="Breakpoint-Wrap">
+		@foreach(Service child in Model.Children())
+		{
+			@await Html.PartialAsync("Text And Image Card",(IPublishedContent)child)
+		}
+	</div>
+</div>
+
+@await Html.PartialAsync("Dark Form")

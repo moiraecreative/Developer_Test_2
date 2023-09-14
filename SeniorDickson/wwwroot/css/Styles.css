@@ -1,0 +1,1098 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --prim-Color: #007898;
+    --seco-Color: #004659;
+    --tert-Color: #F4F4F7;
+    --white: #ffffff;
+    --black: #000000;
+}
+
+/* #region Universal Styles */
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Exo 2', sans-serif;
+    line-height: 1.5;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    font-weight: 400;
+}
+
+body {
+    background-color: var(--white);
+    color: var(--black);
+    margin: 0;
+}
+
+a.NoLinkStyles {
+    text-decoration: none;
+    color: unset;
+}
+
+picture img {
+    width: 100%;
+}
+
+.dropdown a {
+    width: fit-content;
+    display: block;
+}
+
+.Background {
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    top: 0;
+}
+
+video {
+    object-fit: cover;
+    width: 100%;
+    min-height: 100%;
+}
+
+.Home > .Background {
+    top: -30px;
+}
+
+a:has(.ServiceCard), a:has(.SectorCard) {
+    width: fit-content;
+    display: block;
+}
+
+.Placeholder {
+    aspect-ratio: 1/1;
+}
+
+.Breadcrumb {
+    display: flex;
+    list-style: none;
+    text-transform: uppercase;
+    gap: 5px;
+    justify-content: center;
+    font-size: 14px;
+    flex-wrap: wrap;
+    max-width: 250px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    .Breadcrumb .active {
+        text-decoration: underline;
+    }
+
+.Tablet-Only {
+    display: none;
+}
+
+/* #endregion */
+
+/* #region 320 */
+
+/* #region Fonts */
+
+h1, h2, h3, h4, p {
+    font-family: 'Exo 2', sans-serif;
+}
+
+h1, h2 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+p {
+    font-size: 14px;
+}
+
+.CTA {
+    text-transform: uppercase;
+    text-decoration: underline;
+}
+
+/* #endregion */
+
+/* #region Breakpoint Wrap */
+
+.Breakpoint-Wrap {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+
+
+/* #endregion */
+
+/* #region Cards */
+
+/* #region Service Card */
+.Service-Wrap {
+    display: grid;
+    grid-gap: 20px;
+    justify-items: center;
+    margin-top: 20px;
+}
+
+.ServiceCard {
+    aspect-ratio: 290/90;
+    position: relative;
+    width: 290px;
+    overflow: hidden;
+    color: white;
+}
+
+    .ServiceCard h2 {
+        font-size: 20px;
+    }
+
+    .ServiceCard .Text {
+        padding: 20px;
+    }
+
+    .ServiceCard .Background {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+
+.Background img {
+    width: 100%;
+}
+
+.Background .Gradient {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(0, 120, 152, 1) 50%, rgba(0, 120, 152, 0.4) 100%);
+    top: 0;
+    left: 0;
+    background-position: 0% 0%;
+    background-size: 200% 100%;
+    transition: background-position 0.5s ease;
+}
+
+.ServiceCard:hover .Background .Gradient {
+    background-position: 100% 0%;
+}
+
+.ServiceCard p {
+    text-decoration: underline;
+}
+
+/* #endregion */
+
+/* #region Sector Card */
+
+.SectorCard .Icon .Default {
+    display: none;
+}
+
+.SectorCard .Icon {
+    width: 100px;
+    position: relative;
+    aspect-ratio: 1/1;
+}
+
+    .SectorCard .Icon .Hover, .SectorCard .Icon .Default {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+.SectorCard {
+    aspect-ratio: 1/1;
+    width: 240px;
+    border: 2px solid white;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+}
+
+.SectorsBlock.Page .SectorCard {
+    border-color: #d5d5d5;
+}
+
+.SectorCard h3 {
+    color: var(--seco-Color);
+}
+
+.SectorCard .CallToActionLabel {
+    text-decoration: underline;
+    text-transform: uppercase;
+    color: var(--prim-Color);
+    margin-top: 5px;
+}
+
+/* #endregion */
+
+/* #region Case Study Card */
+
+.CaseStudyCard .Image img {
+    aspect-ratio: 290/218;
+    width: 100%;
+    object-fit: cover;
+}
+
+.CaseStudyCard {
+    border: 1px solid var(--prim-Color);
+    max-width: 290px;
+}
+
+    .CaseStudyCard .Text {
+        padding: 20px;
+        display: grid;
+        grid-gap: 20px;
+    }
+
+    .CaseStudyCard .CTA {
+        text-align: center;
+    }
+
+.CaseStudiesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.CaseStudyCard h3 {
+    color: var(--seco-Color);
+    font-size: 24px;
+}
+
+.CaseStudyCard .Title {
+    min-height: 72px;
+}
+
+/* #endregion */
+
+/* #region Team Card */
+
+.Team-Card {
+    border: 2px solid var(--seco-Color);
+}
+
+    .Team-Card .Image {
+        aspect-ratio: 1/1;
+    }
+
+        .Team-Card .Image img {
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            width: 100%;
+        }
+
+    .Team-Card .Text {
+        padding: 20px;
+        text-align: center;
+        display: grid;
+        grid-gap: 10px;
+    }
+
+    .Team-Card h3 {
+        color: var(--seco-Color);
+    }
+
+/* #endregion */
+
+/* #region Text and Image Card */
+
+.TextAndImageCard .Image {
+    width: 100%;
+}
+
+    .TextAndImageCard .Image img {
+        width: 100%;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+    }
+
+.TextAndImageCard .Text {
+    padding: 20px;
+    text-align: center;
+}
+
+.TextAndImageCard {
+    border: 1px solid var(--prim-Color);
+}
+
+    .TextAndImageCard .Text {
+        display: grid;
+        grid-gap: 20px;
+    }
+
+        .TextAndImageCard .Text h2 {
+            color: var(--prim-Color);
+        }
+/* #endregion */
+
+/* #region Sidebar Nav */
+
+.SidebarNav li.current {
+    text-decoration: underline;
+}
+
+.SidebarNav {
+    border: 2px solid var(--prim-Color);
+    padding: 30px;
+    display: none;
+}
+
+    .SidebarNav ul {
+        list-style: none;
+    }
+
+    .SidebarNav h2 {
+        color: var(--seco-Color);
+    }
+
+    .SidebarNav li {
+        font-size: 20px;
+        color: var(--prim-Color);
+    }
+
+/* #endregion */
+
+/* #region Segment */
+
+.Segment h2 {
+    color: var(--seco-Color);
+}
+
+.Segment {
+    padding: 20px;
+    background-color: #F4F4F7;
+    display: grid;
+    grid-gap: 12px;
+}
+/* #endregion */
+
+/* #endregion */
+
+/* #region Blocks */
+
+/* #region Block */
+
+.Block {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    position: relative;
+}
+
+    .Block .CTA {
+        background-color: var(--prim-Color);
+        color: white;
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .Block .Breakpoint-Wrap > h2 {
+        color: var(--prim-Color);
+    }
+
+/* #endregion */
+
+/* #region Hero Block*/
+
+.Hero {
+    overflow: hidden;
+    color: white;
+}
+
+.Hero {
+    padding-top: 96px;
+    padding-bottom: 40px;
+}
+
+    .Hero .Background {
+        display: flex;
+        height: calc(100% + 30px);
+        align-items: center;
+        background-color: var(--prim-Color);
+        justify-content: center;
+    }
+
+    .Hero > .Background > .Gradient {
+        background: linear-gradient(90deg, rgba(0, 120, 152, 1) 50%, rgba(0, 120, 152, 0.4) 100%);
+        background-size: 200% 100%;
+        animation: GradientEnter forwards 0.5s linear;
+        animation-delay: 0.5s;
+    }
+
+    .Hero :not(.Service-Card) .Text {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .Hero:not(.Home) h1 {
+        margin-bottom: 20px;
+    }
+
+    .Hero.Service {
+        padding-bottom: 110px;
+    }
+
+        .Hero.Service > .Background img {
+            aspect-ratio: 1/1;
+        }
+
+        .Hero.Service .Breakpoint-Wrap img {
+            width: 290px;
+            margin-left: auto;
+            margin-right: auto;
+            left: 0;
+            right: 0;
+            position: absolute;
+            bottom: 0;
+            transform: translateY(100%);
+            aspect-ratio: 290/218;
+            object-fit: cover;
+        }
+
+        .Hero.Service .Breakpoint-Wrap {
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+            .Hero.Service .Breakpoint-Wrap > h1 {
+                margin-bottom: 0;
+            }
+
+        .Hero.Service .Background {
+            height: 100%;
+            overflow: hidden;
+        }
+
+    .Hero.Service {
+        overflow: visible;
+        margin-bottom: 110px
+    }
+
+    .Hero.Sector .Breakpoint-Wrap img {
+        filter: invert(1);
+        max-width: 120px;
+        aspect-ratio: 1/1;
+        object-fit: contain;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        margin-bottom: 72px;
+    }
+
+    .Hero.Sector h1 {
+        margin-bottom: 0;
+    }
+
+    .Hero.Sector .Breadcrumb {
+        margin-bottom: 20px;
+    }
+
+    .Hero.CaseStudy h1 {
+        margin-bottom: 0;
+    }
+
+    .Hero.CaseStudy .Breakpoint-Wrap {
+        display: grid;
+        grid-gap: 20px;
+    }
+
+@keyframes GradientEnter {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 100% 0;
+    }
+}
+
+.Hero.Maintenance {
+    height: 100dvh;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+/* #endregion */
+
+/* #region Sectors Block */
+
+.SectorsBlock:not(.Page) {
+    background-color: #d5d5d5;
+}
+
+.SectorsBlock h2 {
+    text-align: center;
+}
+
+.SectorsBlock .SectorContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.SectorsBlock.Page .SectorContainer {
+    margin-top: 0;
+}
+
+.SectorsBlock .CTA {
+    width: 250px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.Block .CTA:hover {
+    color: white;
+}
+
+/* #endregion */
+
+/* #region TextAndImageBlock */
+
+
+/* #endregion */
+
+/* #region CaseStudyBlock */
+
+.CaseStudiesBlock .Breakpoint-Wrap > h2 {
+    text-align: center;
+}
+
+.CaseStudiesBlock .Breakpoint-Wrap {
+    display: grid;
+    grid-gap: 20px;
+}
+
+.Article-Page-Selector {
+    display: flex;
+    justify-content: center;
+    color: var(--prim-Color);
+}
+
+    .Article-Page-Selector input[type=radio] {
+        display: none;
+    }
+
+    .Article-Page-Selector label {
+        width: 40px;
+        aspect-ratio: 1/1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .Article-Page-Selector input[type=radio]:checked + label {
+        background-color: #F4F4F7;
+    }
+
+
+
+/* #endregion */
+
+/* #region Clients and Suppliers Block */
+
+.ClientsAndSuppliersBlock {
+    background-color: var(--seco-Color);
+}
+
+    .ClientsAndSuppliersBlock img {
+        object-fit: contain;
+        filter: sepia(5) contrast(0.5) grayscale(1) brightness(500);
+    }
+
+    .ClientsAndSuppliersBlock .Breakpoint-Wrap > h2 {
+        color: white;
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .ClientsAndSuppliersBlock .CAndSContainer {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        justify-content: center;
+        margin-top: 40px;
+    }
+
+    .ClientsAndSuppliersBlock img {
+        width: 160px;
+    }
+
+/* #endregion */
+
+/* #region Team Block */
+
+.TeamBlock h2, .TeamBlock .Rich-Text {
+    text-align: center;
+}
+
+.TeamBlock .TeamContainer {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.TeamBlock .Breakpoint-Wrap {
+    display: grid;
+}
+
+.TeamBlock .CTA {
+    text-align: center;
+}
+
+/* #endregion */
+
+/* #region Form Block */
+
+.Block.Form {
+    background-color: var(--seco-Color);
+    color: white;
+}
+
+.form-input {
+    display: block;
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 10px 12px;
+    width: 100%;
+    font-family: 'Exo 2', sans-serif;
+}
+
+.form-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+    align-items: center;
+}
+
+.Form form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.form-input::placeholder {
+    color: #ffffff80;
+}
+
+.form-input.input-validation-error {
+    border-color: rgb(255,100,100);
+    background-color: rgba(255, 0,0,0.5);
+}
+
+.Form label {
+    font-size: 14px;
+}
+
+textarea.form-input {
+    height: 80px;
+}
+
+.field-validation-error {
+    font-size: 14px;
+    color: white;
+    background-color: rgba(255,0,0,0.5);
+    border: 2px solid rgba(100,0,0,0.5);
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.Block.Form .Breakpoint-Wrap > h2 {
+    font-size: 20px;
+    color: white;
+    text-align: center;
+}
+
+input::file-selector-button {
+    font-size: 14px;
+    color: var(--prim-Color);
+    padding: 12px 25px;
+    border: none;
+    text-decoration: underline;
+    background-color: white;
+    font-family: 'Exo 2', sans-serif;
+    text-transform: uppercase;
+    margin-right: 35px;
+}
+
+.form-group:has(input[type="file"]) {
+    display: grid;
+    grid-gap: 10px;
+}
+
+[type="submit"] {
+    width: 100%;
+    background-color: white;
+    padding: 11px;
+    color: var(--prim-Color);
+    text-decoration: underline;
+    border: none;
+    font-family: 'Exo 2', sans-serif;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+/* #endregion */
+
+/* #region Floating Form */
+
+.Form.Floating {
+    padding: 40px 15px;
+    background-color: #F4F4F7;
+}
+
+    .Form.Floating .form-input {
+        border-color: var(--prim-Color);
+    }
+
+    .Form.Floating [type="submit"] {
+        background-color: var(--prim-Color);
+        color: white;
+    }
+
+    .Form.Floating label, .Form.Floating input, .Form.Floating #AcceptedTypes, .Form.Floating textarea {
+        color: var(--seco-Color);
+    }
+
+textarea {
+    resize: none;
+}
+
+.Form.Floating ::placeholder {
+    color: var(--seco-Color);
+}
+
+.Form.Floating h2 {
+    text-align: center;
+}
+
+/* #endregion */
+
+/* #region Card Holder */
+
+.CardHolder .Breakpoint-Wrap {
+    display: grid;
+    grid-gap: 20px;
+}
+
+/* #endregion */
+
+/* #region RTBlock */
+
+.RTBlock h1 {
+    color: var(--prim-Color);
+    text-align: center;
+}
+
+.RTBlock h2 {
+    color: var(--prim-Color);
+    text-align: center;
+}
+
+.RTBlock h3 {
+    color: var(--prim-Color);
+    text-align: center;
+}
+
+/* #endregion */
+
+/* #region Segment Block */
+
+.SideNavContainer {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+    .SideNavContainer .Block {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    .SideNavContainer .umb-block-list {
+        display: grid;
+        grid-gap: 40px;
+    }
+
+.SegmentBlock {
+    display: grid;
+    grid-gap: 20px;
+}
+
+/* #endregion */
+
+/* #region Carousel */
+
+.Carousel {
+    aspect-ratio: 320/214;
+    margin-bottom: 40px;
+    overflow: hidden;
+    position: relative;
+}
+
+    .Carousel img {
+        object-fit: cover;
+        aspect-ratio: 320/214;
+    }
+
+.slick-arrow {
+    position: absolute;
+    z-index: 10;
+    height: 100%;
+    width: 30px;
+    background-color: #ffffff80;
+    color: transparent;
+    border: none;
+}
+
+.slick-next {
+    right: 0;
+    top: 0;
+}
+
+.slick-prev {
+    left: 0;
+    top: 0;
+}
+
+    .slick-next::after, .slick-prev::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        color: red;
+        width: 25px;
+        aspect-ratio: 1/1;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+
+.slick-next::after {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23007898" class="bi bi-chevron-right" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>');
+}
+
+.slick-prev::after {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23007898" class="bi bi-chevron-left" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>');
+}
+
+
+
+/* #endregion */
+
+/* #region Contact Details */
+
+.ContactDetails .Breakpoint-Wrap {
+    display: grid;
+    grid-gap: 20px;
+}
+
+.Details, .Socials {
+    display: grid;
+    grid-gap: 20px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    .Details a, .Socials a {
+        font-size: 20px;
+    }
+
+.ContactDetails h2, .Form.Floating h2 {
+    font-size: 20px;
+}
+
+.ContactDetails .Breakpoint-Wrap > h2 {
+    color: var(--prim-Color);
+    text-align: center;
+}
+
+.Socials h2, .Form.Floating h2 {
+    color: var(--seco-Color);
+}
+
+.Socials {
+    border: 2px solid #F4F4F7;
+    padding: 20px 40px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+    /* #endregion */
+
+    /* #region Footer */
+
+    .Socials-Nav p, .Socials p {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+.Footer .Home img {
+    max-width: 208px;
+}
+
+.Footer {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+    .Footer h3 {
+        font-size: 18px;
+        color: var(--seco-Color);
+    }
+
+    .Footer .Breakpoint-Wrap {
+        display: grid;
+        grid-gap: 20px;
+    }
+
+.Footer-Nav {
+    margin-top: 20px;
+}
+
+.Footer-Nav, .Contact-Nav, .Socials-Nav, .Accreditations-Nav {
+    display: grid;
+    grid-gap: 9px;
+}
+
+.Moirae-Footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-bottom: 35px;
+}
+
+    .Moirae-Footer p {
+        font-size: 12px;
+    }
+
+    .Moirae-Footer img {
+        width: 10px;
+        margin-left: 5px;
+    }
+
+.AccredContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    gap: 20px;
+}
+
+    .AccredContainer img {
+        height: 60px;
+        width: auto;
+    }
+/* #endregion */
+/* #endregion */
+/* #endregion */
+
+/* #region 768 */
+
+
+
+/* #endregion */
+
+/* #region Edge Cases */
+
+.Hero .CTA {
+    border-color: white;
+    color: white;
+}
+
+    .Hero .CTA::after {
+        background-color: white;
+    }
+
+    .Hero .CTA:hover {
+        color: var(--prim-Color);
+    }
+
+@media (max-width: 1169px) {
+    .Hero .CTA {
+        background-color: white;
+        color: var(--prim-Color);
+        text-align: center;
+    }
+}
+
+@media (max-width: 767px) {
+    .Hero > .Background img {
+        aspect-ratio: 1/2;
+        object-fit: cover;
+    }
+
+    .Hero > .Background > .Gradient {
+        background: linear-gradient(180deg, rgba(0, 120, 152, 1) 50%, rgba(0, 120, 152, 0.4) 100%);
+        background-size: 100% 200%;
+    }
+
+    .Hero > .Breakpoint-Wrap > .Text, .Hero > .Breakpoint-Wrap > h1 {
+        text-align: center;
+    }
+
+    @keyframes GradientEnter {
+        0% {
+            background-position: 0 0;
+        }
+
+        100% {
+            background-position: 0 100%;
+        }
+    }
+
+    .TeamContainer .Team-Card {
+        margin-bottom: 20px;
+    }
+
+        .TeamContainer .Team-Card:nth-child(n+5) {
+            max-height: 0;
+            transition: max-height 0.5s ease, margin 0.2s ease;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+    .show-more {
+        display: block;
+        order: 1;
+    }
+
+        .show-more:not(.is-expanded) ~ .TeamContainer .Team-Card:nth-child(n+5):not(.transitioning) {
+            border: none;
+        }
+
+        .show-more:not(.is-expanded) ~ .TeamContainer .Team-Card:nth-child(n+5) {
+            margin-bottom: 0;
+        }
+}
+/* #endregion */

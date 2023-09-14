@@ -1,0 +1,37 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Moirae.Utility;
+
+@{
+    var content = (TextAndImageBlock)Model.Content;
+    var settings = (TextAndImageBlock)Model.Settings;
+}
+
+<div class="Block TextAndImageBlock">
+    <div class="Breakpoint-Wrap">
+        <div class="TextAndImageCard">
+            <div class="Image">
+                @if (content.Image != null)
+                {
+                    <img src="@content.Image.Url()?format=webp" alt="@content.Image.GetProperty("altTag")" />
+                }
+                else
+                {
+                    @await DefaultImageMaker.BuildDefaultImage()
+                }
+            </div>
+            <div class="Text">
+                <h2>@(String.IsNullOrEmpty(content.Header) ? content.ContentType.Alias : content.Header)</h2>
+                @content.Text
+                @if (content.CallToActionVisible)
+                {
+                    <a href="@content.Target.Url()" class="NoLinkStyles">
+                        <div class="CTA">
+                            @content.Label
+                        </div>
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Home>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    Layout = "Master.cshtml";
+}
+
+<div class="Block Hero Home">
+    <div class="Background" aria-hidden="true">
+        <video src="~/Videos/Reels.mov" autoplay muted loop/>
+    </div>
+    <div class="Breakpoint-Wrap">
+        <h1>@Model.Title</h1>
+        @if (Model.RelatedServices != null)
+        {
+            <div class="Service-Wrap">
+                @foreach (Service service in Model.RelatedServices)
+                {
+                    @await Html.PartialAsync("Service Card", service)
+                }
+            </div>
+        }
+
+    </div>
+</div>
+
+@await Html.GetBlockListHtmlAsync(Model.Blocks)

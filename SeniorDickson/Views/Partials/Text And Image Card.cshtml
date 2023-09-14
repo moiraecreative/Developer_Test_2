@@ -1,0 +1,32 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Service>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Moirae.Utility;
+
+@{
+
+}
+
+<a href="@Model.Url()" class="NoLinkStyles">
+    <div class="TextAndImageCard">
+        <div class="Image">
+            @if (Model.HeroImage != null)
+            {
+                <img src="@Model.HeroImage.Url()" alt="@(Model.HeroImage.Value<string>("altTag"))" />
+            }
+            else
+            {
+                @await DefaultImageMaker.BuildDefaultImage()
+            }
+        </div>
+        <div class="Text">
+            <h2>@(String.IsNullOrEmpty(Model.Title) ? Model.Name : Model.Title)</h2>
+            @Model.HeroText
+
+            <div class="CTA">
+                <p>Find Out More</p>
+            </div>
+
+        </div>
+    </div>
+</a>

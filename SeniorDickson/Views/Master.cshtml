@@ -1,0 +1,24 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = null;
+}
+
+<!doctype html>
+<html>
+	<head>
+		@await Html.PartialAsync("Header Config")
+		@await RenderSectionAsync("HeaderScripts", false)
+		<meta-fields></meta-fields>
+		<render-script position="HeadBottom"></render-script>
+	</head>
+	<body>
+		<render-script position="BodyTop"></render-script>
+		@await Html.PartialAsync("Header")
+		@RenderBody()
+		@await Html.PartialAsync("Footer")
+		@await Html.PartialAsync("Scripts")
+		@await RenderSectionAsync("Scripts", false)
+		<render-script position="BodyBottom"></render-script>
+	</body>
+</html>

@@ -1,0 +1,20 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Sector>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@{
+    var title = (String.IsNullOrEmpty(Model.NavTitle)) ? Model.Title : Model.NavTitle;
+}
+
+<a href="@Model.Url()" class="NoLinkStyles">
+    <div class="SectorCard">
+        <div class="Icon" aria-disabled="true">
+            <img class="Default" src="@Model.Icon.Url()" alt="@(Model.Icon.Value<string>("altTag"))" />
+            <img class="Hover" src="@Model.HoverIcon.Url()" alt="@(Model.Icon.Value<string>("altTag"))" />
+        </div>
+        <div class="Title">
+            <h3>@title</h3>
+            <p class="CallToActionLabel">Find Out More</p>
+        </div>
+    </div>
+</a>

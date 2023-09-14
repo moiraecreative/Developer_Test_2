@@ -1,0 +1,23 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Moirae.Utility;
+
+@{
+    var content = (ClientsAndSuppliersBlock)Model.Content;
+    var settings = (ClientsAndSuppliersBlock)Model.Settings;
+    var root = Umbraco.ContentAtRoot().FirstOrDefault() as Master;
+    var csList = root.ClientsAndSuppliers.Children();
+}
+
+
+<div class="Block ClientsAndSuppliersBlock">
+    <div class="Breakpoint-Wrap">
+        <h2>@(String.IsNullOrEmpty(content.Header) ? content.ContentType.Alias : content.Header)</h2>
+        <div class="CAndSContainer">
+            @foreach (ClientSupplier cs in csList)
+            {
+                <img src="@ImageBackgroundRemover.RemoveWhiteBackground(cs.Image.Url(mode: UrlMode.Absolute), 100)" alt="@cs.Name" />
+            }
+        </div>
+    </div>
+</div>

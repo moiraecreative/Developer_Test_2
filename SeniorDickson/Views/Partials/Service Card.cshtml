@@ -1,0 +1,19 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Service>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@{
+    var title = (String.IsNullOrEmpty(Model.NavTitle)) ? Model.Name : Model.NavTitle;
+}
+<a href="@Model.Url()" class="NoLinkStyles">
+    <div class="ServiceCard">
+        <div class="Background" aria-disabled="true">
+            <img src="@Model.HeroImage.Url()" alt="@(Model.HeroImage.Value<string>("altTag"))" />
+            <div class="Gradient"></div>
+        </div>
+        <div class="Text">
+            <div class="Header"><h2>@title</h2></div>
+            <div class="CTA-Text"><p>Find out more</p></div>
+        </div>
+    </div>
+</a>

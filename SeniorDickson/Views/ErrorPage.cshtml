@@ -1,0 +1,30 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.ErrorPage>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Microsoft.AspNetCore.Http;
+@using Microsoft.AspNetCore.WebUtilities;
+@inject IHttpContextAccessor HttpContextAccessor;
+@using Moirae.Utility;
+@{
+    Layout = "Master.cshtml";
+    int error = HttpContextAccessor.HttpContext.Response.StatusCode;
+    string reasonPhrase = CustomErrors.ShowError(error) ?? ReasonPhrases.GetReasonPhrase(error);
+}
+
+<div class="Block Hero">
+    <div class="Background" aria-hidden="true">
+        <img src="@Model.HeroImage.Url()?format=webp" alt="@(Model.HeroImage.Value<string>("altTag"))" />
+        <div class="Gradient"></div>
+    </div>
+    <div class="Breakpoint-Wrap">
+        <h1>@error</h1>
+        <div class="Text">
+            <p>@reasonPhrase</p>
+        </div>
+        <a href="/" class="NoLinkStyles">
+            <div class="CTA">
+                Back Home
+            </div>
+        </a>
+    </div>
+</div>
